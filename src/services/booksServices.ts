@@ -7,3 +7,8 @@ export const getEntries = () => booksData;
 export const getBookById = (id: string) => {
     return booksData.find(book => book.id === id);
 };
+
+// Return books with a price more expensive than the param
+export const getBooksByPrice = (price: number) => {
+    return booksData.filter(book => book.price > price);
+};

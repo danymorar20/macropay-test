@@ -30,19 +30,33 @@ const express_1 = __importDefault(require("express"));
 const booksServices = __importStar(require("../services/booksServices"));
 const router = express_1.default.Router();
 // GET endpoint to retrieve a list of books from a JSON file 
-router.get('/books', (_req, res) => {
-    const books = booksServices.getEntries();
+// router.get('/books', (_req, res) => {
+//     const books = booksServices.getEntries();
+//     res.status(200).json(books);
+// });
+// // GET endpoint to retrieve books by ID 
+// router.get('/books/:id', (req, res) => {
+//     const bookId = req.params.id;
+//     const book = booksServices.getBookById(bookId);
+//     if (book) {
+//         res.status(200).json(book);
+//     } else {
+//         res.status(400).json({ error: 'book not found' });
+//     }
+// });
+// GET endpoint to get all the books that are more expensive than the param “price” provided
+router.get('books/price', (req, res) => {
+    const priceParam = req.query.price;
+    console.log(priceParam);
+    // check if parameter has only numbers
+    if (!/^\d+$/.test(priceParam)) {
+        return res.status(400).json({ error: 'Price should contain only numbers' });
+    }
+    const price = parseInt(priceParam, 10);
+    const books = booksServices.getBooksByPrice(price);
+    // if (books.length === 0) {
+    //     return res.status(404).json({ error: 'No books found' });
+    // } 
     res.status(200).json(books);
-});
-// GET endpoint to retrieve books by ID 
-router.get('/books/:id', (req, res) => {
-    const bookId = req.params.id;
-    const book = booksServices.getBookById(bookId);
-    if (book) {
-        res.status(200).json(book);
-    }
-    else {
-        res.status(400).json({ error: 'book not found' });
-    }
 });
 exports.default = router;

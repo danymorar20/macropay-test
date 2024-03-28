@@ -11,7 +11,7 @@ app.get('/hello', (_req, res) => {
     res.status(200).type('text/plain').send('Hello, world!');
 });
 
-app.use('/api', booksRouter);
+app.use('/api/books', booksRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
