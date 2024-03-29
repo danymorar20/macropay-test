@@ -39,4 +39,14 @@ router.get('/:id', (req, res) => {
     }
 });
 
+// POST endpoint to create a new book
+router.post('/', (req, res) => {
+    try {
+        const newBook = booksServices.createBook(req.body);
+        res.status(201).json(newBook);
+    } catch (error: any) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
 export default router;
