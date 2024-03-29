@@ -1,6 +1,7 @@
 import booksData from '../storage/MOCK_DATA.json';
 import { v4 as uuidv4 } from 'uuid';
 import { Book } from '../types';
+import { NoBooksFoundError, ValidationError } from './../utils/errors';
 
 let books: Book[] = [];
 
@@ -43,3 +44,21 @@ export const createBook = (bookData: any): Book => {
 
     return newBook;
 };
+
+export function getBooksByAuthorPhrase(phrase: string) {
+    if (!/^[a-zA-Z]+$/.test(phrase)) {
+        throw new ValidationError('Phrase should contain only alphabet letters');
+    }
+
+    const booksContainingPhrase = booksData.filter(book => {
+        const authorName = book.author.toLowerCase();
+        const phraseLetters = phrase.toLowerCase().split('');
+        return phraseLetters.every(letter => authorName.includes(letter));
+    });
+
+    if (booksContainingPhrase.length === 0) {
+        throw new NoBooksFoundError('No books found with the provided author phrase');
+    }
+
+    return booksContainingPhrase;
+}
