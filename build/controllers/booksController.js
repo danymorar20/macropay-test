@@ -29,7 +29,6 @@ const errors_1 = require("./../utils/errors");
 function handleBooksByPhrase(req, res) {
     var _a, _b;
     const phrase = (_b = (_a = req.query.phrase) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "";
-    ;
     try {
         const booksContainingPhrase = booksServices.getBooksByAuthorPhrase(phrase);
         res.status(200).json(booksContainingPhrase);
@@ -74,7 +73,7 @@ function handleValidationErrorOrNoBooksFoundError(res, error) {
         res.status(500).json({ error: 'Internal server error.' });
     }
 }
-function getAverageBookCost(req, res) {
+function getAverageBookCost(_req, res) {
     try {
         const average = booksServices.getAverageBookCost();
         res.status(200).json({ average });

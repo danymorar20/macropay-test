@@ -3,7 +3,7 @@ import * as booksServices from '../services/booksServices';
 import { NoBooksFoundError, ValidationError } from './../utils/errors';
 
 export function handleBooksByPhrase(req: Request, res: Response) {
-    const phrase = req.query.phrase?.toString() ?? "";;
+    const phrase = req.query.phrase?.toString() ?? "";
 
     try {
         const booksContainingPhrase = booksServices.getBooksByAuthorPhrase(phrase);
@@ -39,7 +39,7 @@ function handleBooksByPrice(_req: Request, res: Response, priceParam: string) {
     }
 }
 
-function handleValidationErrorOrNoBooksFoundError(res: Response, error: any) {
+function handleValidationErrorOrNoBooksFoundError(res: Response, error: ValidationError | NoBooksFoundError | Error) {
     if (error instanceof ValidationError) {
         res.status(400).json({ error: error.message });
     } else if (error instanceof NoBooksFoundError) {

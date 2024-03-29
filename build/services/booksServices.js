@@ -7,7 +7,6 @@ exports.getAverageBookCost = exports.getBooksByAuthorPhrase = exports.createBook
 const MOCK_DATA_json_1 = __importDefault(require("../storage/MOCK_DATA.json"));
 const uuid_1 = require("uuid");
 const errors_1 = require("./../utils/errors");
-let books = [];
 // Return all books
 const getEntries = () => MOCK_DATA_json_1.default;
 exports.getEntries = getEntries;
@@ -45,6 +44,7 @@ const createBook = (bookData) => {
     return newBook;
 };
 exports.createBook = createBook;
+// Return all books with the phrase in the author
 function getBooksByAuthorPhrase(phrase) {
     if (!/^[a-zA-Z]+$/.test(phrase)) {
         throw new errors_1.ValidationError('Phrase should contain only alphabet letters');
@@ -60,6 +60,7 @@ function getBooksByAuthorPhrase(phrase) {
     return booksContainingPhrase;
 }
 exports.getBooksByAuthorPhrase = getBooksByAuthorPhrase;
+// Return average from all books
 function getAverageBookCost() {
     const books = (0, exports.getEntries)();
     if (books.length === 0) {

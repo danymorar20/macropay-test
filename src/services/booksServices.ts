@@ -2,9 +2,6 @@ import booksData from '../storage/MOCK_DATA.json';
 import { v4 as uuidv4 } from 'uuid';
 import { Book } from '../types';
 import { NoBooksFoundError, ValidationError } from './../utils/errors';
-import { Request, Response } from 'express';
-
-let books: Book[] = [];
 
 // Return all books
 export const getEntries = () => booksData;
