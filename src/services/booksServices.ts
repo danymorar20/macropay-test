@@ -2,6 +2,7 @@ import booksData from '../storage/MOCK_DATA.json';
 import { v4 as uuidv4 } from 'uuid';
 import { Book } from '../types';
 import { NoBooksFoundError, ValidationError } from './../utils/errors';
+import { Request, Response } from 'express';
 
 let books: Book[] = [];
 
@@ -45,6 +46,7 @@ export const createBook = (bookData: any): Book => {
     return newBook;
 };
 
+// Return all books with the phrase in the author
 export function getBooksByAuthorPhrase(phrase: string) {
     if (!/^[a-zA-Z]+$/.test(phrase)) {
         throw new ValidationError('Phrase should contain only alphabet letters');
@@ -61,4 +63,19 @@ export function getBooksByAuthorPhrase(phrase: string) {
     }
 
     return booksContainingPhrase;
+}
+
+// Return average from all books
+export function getAverageBookCost() {
+    const books = getEntries();
+
+    if (books.length === 0) {
+        throw new Error('No books found');
+    }
+
+    const totalCost = books.reduce((acc, book) => acc + book.price, 0);
+    const averageCost = totalCost / books.length;
+    const formattedAverageCost = parseFloat(averageCost.toFixed(2));
+
+    return formattedAverageCost;
 }

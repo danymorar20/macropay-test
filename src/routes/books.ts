@@ -5,6 +5,9 @@ import * as booksController from '../controllers/booksController';
 
 const router = express.Router();
 
+//GET endpoint to get the average cost of each book
+router.get('/average', booksController.getAverageBookCost);
+
 // GET endpoint to get all the books that are more expensive than the param “price” provided
 // or get all books by phase or all books
 router.get('/', (req: Request, res: Response) => {

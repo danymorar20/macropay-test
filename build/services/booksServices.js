@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBooksByAuthorPhrase = exports.createBook = exports.getBooksByPrice = exports.getBookById = exports.getEntries = void 0;
+exports.getAverageBookCost = exports.getBooksByAuthorPhrase = exports.createBook = exports.getBooksByPrice = exports.getBookById = exports.getEntries = void 0;
 const MOCK_DATA_json_1 = __importDefault(require("../storage/MOCK_DATA.json"));
 const uuid_1 = require("uuid");
 const errors_1 = require("./../utils/errors");
@@ -60,3 +60,14 @@ function getBooksByAuthorPhrase(phrase) {
     return booksContainingPhrase;
 }
 exports.getBooksByAuthorPhrase = getBooksByAuthorPhrase;
+function getAverageBookCost() {
+    const books = (0, exports.getEntries)();
+    if (books.length === 0) {
+        throw new Error('No books found');
+    }
+    const totalCost = books.reduce((acc, book) => acc + book.price, 0);
+    const averageCost = totalCost / books.length;
+    const formattedAverageCost = parseFloat(averageCost.toFixed(2));
+    return formattedAverageCost;
+}
+exports.getAverageBookCost = getAverageBookCost;

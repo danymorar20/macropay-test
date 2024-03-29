@@ -1,5 +1,4 @@
 "use strict";
-// booksController.ts
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -24,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleBooksByPriceOrAll = exports.handleBooksByPhrase = void 0;
+exports.getAverageBookCost = exports.handleBooksByPriceOrAll = exports.handleBooksByPhrase = void 0;
 const booksServices = __importStar(require("../services/booksServices"));
 const errors_1 = require("./../utils/errors");
 function handleBooksByPhrase(req, res) {
@@ -75,3 +74,13 @@ function handleValidationErrorOrNoBooksFoundError(res, error) {
         res.status(500).json({ error: 'Internal server error.' });
     }
 }
+function getAverageBookCost(req, res) {
+    try {
+        const average = booksServices.getAverageBookCost();
+        res.status(200).json({ average });
+    }
+    catch (error) {
+        res.status(404).json({ error: error.message });
+    }
+}
+exports.getAverageBookCost = getAverageBookCost;
