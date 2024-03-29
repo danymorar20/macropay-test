@@ -5,12 +5,12 @@ import { NoBooksFoundError, ValidationError } from './../utils/errors';
 export function handleBooksByPhrase(req: Request, res: Response) {
     const phrase = req.query.phrase?.toString() ?? "";
 
-    try {
-        const booksContainingPhrase = booksServices.getBooksByAuthorPhrase(phrase);
-        res.status(200).json(booksContainingPhrase);
-    } catch (error: any) {
-        handleValidationErrorOrNoBooksFoundError(res, error);
-    }
+  try {
+    const booksContainingPhrase = booksServices.getBooksByAuthorPhrase(phrase);
+    res.status(200).json(booksContainingPhrase);
+  } catch (error: any) {
+    handleValidationErrorOrNoBooksFoundError(res, error);
+  }
 }
 
 export function handleBooksByPriceOrAll(req: Request, res: Response) {
