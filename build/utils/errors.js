@@ -4,14 +4,14 @@ exports.ValidationError = exports.NoBooksFoundError = void 0;
 class NoBooksFoundError extends Error {
     constructor(message) {
         super(message);
-        this.name = 'NoBooksFoundError';
+        this.name = "NoBooksFoundError";
     }
 }
 exports.NoBooksFoundError = NoBooksFoundError;
 class ValidationError extends Error {
     constructor(message) {
         super(message);
-        this.name = 'ValidationError';
+        this.name = "ValidationError";
     }
 }
 exports.ValidationError = ValidationError;

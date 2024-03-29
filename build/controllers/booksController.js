@@ -51,12 +51,12 @@ function handleBooksByPriceOrAll(req, res) {
 exports.handleBooksByPriceOrAll = handleBooksByPriceOrAll;
 function handleBooksByPrice(_req, res, priceParam) {
     if (!/^\d+$/.test(priceParam)) {
-        return res.status(400).json({ error: 'Price should contain only numbers' });
+        return res.status(400).json({ error: "Price should contain only numbers" });
     }
     const price = parseInt(priceParam, 10);
     const books = booksServices.getBooksByPrice(price);
     if (books.length === 0) {
-        res.status(404).json({ error: 'No books found with the provided price' });
+        res.status(404).json({ error: "No books found with the provided price" });
     }
     else {
         res.status(200).json(books);
@@ -70,7 +70,7 @@ function handleValidationErrorOrNoBooksFoundError(res, error) {
         res.status(404).json({ error: error.message });
     }
     else {
-        res.status(500).json({ error: 'Internal server error.' });
+        res.status(500).json({ error: "Internal server error." });
     }
 }
 function getAverageBookCost(_req, res) {
