@@ -28,46 +28,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const booksServices = __importStar(require("../services/booksServices"));
-const errors_1 = require("./../utils/errors");
+const booksController = __importStar(require("../controllers/booksController"));
 const router = express_1.default.Router();
 // GET endpoint to get all the books that are more expensive than the param “price” provided
-// or get all books
-router.get('/books', (req, res) => {
+// or get all books by phase or all books
+router.get('/', (req, res) => {
     var _a;
     const phrase = (_a = req.query.phrase) === null || _a === void 0 ? void 0 : _a.toString();
     if (phrase) {
-        try {
-            const booksContainingPhrase = booksServices.getBooksByAuthorPhrase(phrase);
-            res.status(200).json(booksContainingPhrase);
-        }
-        catch (error) {
-            if (error instanceof errors_1.ValidationError) {
-                res.status(400).json({ error: error.message });
-            }
-            else if (error instanceof errors_1.NoBooksFoundError) {
-                res.status(404).json({ error: error.message });
-            }
-            else {
-                res.status(500).json({ error: 'Internal server error.' });
-            }
-        }
+        booksController.handleBooksByPhrase(req, res);
     }
     else {
-        const priceParam = req.query.price;
-        if (priceParam) {
-            if (!/^\d+$/.test(priceParam)) {
-                return res.status(400).json({ error: 'Price should contain only numbers' });
-            }
-            const price = parseInt(priceParam, 10);
-            const books = booksServices.getBooksByPrice(price);
-            if (books.length === 0)
-                return res.status(404).json({ error: 'No books found with the provided price' });
-            res.status(200).json(books);
-        }
-        else {
-            const books = booksServices.getEntries();
-            res.status(200).json(books);
-        }
+        booksController.handleBooksByPriceOrAll(req, res);
     }
 });
 // GET endpoint to retrieve books by ID 

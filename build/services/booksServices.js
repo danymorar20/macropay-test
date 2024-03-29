@@ -51,7 +51,8 @@ function getBooksByAuthorPhrase(phrase) {
     }
     const booksContainingPhrase = MOCK_DATA_json_1.default.filter(book => {
         const authorName = book.author.toLowerCase();
-        return authorName.includes(phrase.toLowerCase());
+        const phraseLetters = phrase.toLowerCase().split('');
+        return phraseLetters.every(letter => authorName.includes(letter));
     });
     if (booksContainingPhrase.length === 0) {
         throw new errors_1.NoBooksFoundError('No books found with the provided author phrase');
