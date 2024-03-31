@@ -8,3 +8,6 @@ export interface Book {
   stars: number;
   description: string;
 }
+export interface User {
+  userId: string;
+}
