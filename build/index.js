@@ -19,7 +19,7 @@ app.get("/hello", (_req, res) => {
 // login endpoint
 app.use("/auth", auth_1.default);
 // endpoints protected with jwt
-app.use("/api/books", cookieJwtAuth_1.cookieJwtAuth, books_1.default);
+app.use("/books", cookieJwtAuth_1.cookieJwtAuth, books_1.default);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

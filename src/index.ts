@@ -20,7 +20,7 @@ app.use("/auth", authRouter);
 
 
 // endpoints protected with jwt
-app.use("/api/books", cookieJwtAuth, booksRouter);
+app.use("/books", cookieJwtAuth, booksRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
