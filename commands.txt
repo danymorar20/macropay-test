@@ -1,0 +1,5 @@
+# build the image command
+docker build -t nombre-de-tu-imagen .
+
+# execute the docker
+docker run -p 3005:3005 nombre-de-tu-imagen

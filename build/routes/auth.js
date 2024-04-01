@@ -12,7 +12,7 @@ const router = express_1.default.Router();
 router.post('/', (req, res) => {
     const { user, password } = req.body;
     // Only for this example, check if user and password are same than the requirement
-    if (user !== 'user4' || password !== 'pass4#') {
+    if (user !== 'user4' && password !== 'pass4#') {
         return res.status(401).json({ error: 'Invalid credentials' });
     }
     // Using the secret key from environment config

@@ -9,7 +9,7 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const cookieJwtAuth_1 = require("./middleware/cookieJwtAuth");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
